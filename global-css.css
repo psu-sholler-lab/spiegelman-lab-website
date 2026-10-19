@@ -1,7 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 /* =========================================================
-   Sholler Lab Global Styles
+   Spiegelman Lab Global Styles
    ========================================================= */
 
 :root {
@@ -787,7 +787,7 @@ h4 {
 #main-content .sh-hero.sh-home-hero:first-child {
   background:
     linear-gradient(120deg, rgba(0, 30, 68, 0.9), rgba(0, 87, 155, 0.85)),
-    url("https://sites.psu.edu/shollerlab/files/2025/11/HMC-JP-082124-campus.webp")
+    url("https://sites.psu.edu/spiegelmanlab/files/2026/08/CAN-JP-071426-Spiegelman-lab-2.JPG")
       center/cover no-repeat !important;
   color: #fff;
   margin-top: 0 !important;
@@ -845,13 +845,13 @@ h4 {
 }
 
 .sh-home-gallery-band {
-  padding: 32px 0;
-  margin: 36px auto;
+  padding: 16px 0 32px;
+  margin: 0 auto 36px;
 }
 
 .sh-home-intro-section {
   background: #fff;
-  padding: 48px 0;
+  padding: 32px 0;
 }
 
 .sh-home-intro-wrap {
@@ -873,7 +873,7 @@ h4 {
 .sh-mission-card {
   margin: 0 auto;
   max-width: 860px;
-  text-align: left;
+  text-align: center;
   padding: 22px 24px;
   border-radius: 16px;
   border: 1px solid rgba(0, 30, 68, 0.16);
@@ -1401,6 +1401,12 @@ h4 {
   }
 }
 
+.sh-people-no-photo {
+  grid-template-columns: 1fr;
+  text-align: center;
+  justify-items: center;
+}
+
 .sh-contact-box {
   white-space: pre-line;
   line-height: 1.7;
@@ -1531,6 +1537,7 @@ h4 {
 
 .sh-contact-panel .sh-grid-70-30 {
   align-items: stretch;
+  grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.5fr);
 }
 
 .sh-contact-map-card,
@@ -1549,7 +1556,7 @@ h4 {
 }
 
 .sh-contact-content-wrapper {
-  width: min(100%, 360px);
+  width: min(100%, 520px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -1570,11 +1577,11 @@ h4 {
 }
 
 .sh-contact-content-wrapper .sh-copy-reset a[href^="mailto:"] {
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   line-height: 1.35;
-  white-space: nowrap;
-  overflow-wrap: normal;
-  word-break: normal;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   display: inline;
   max-width: none;
   vertical-align: baseline;
@@ -1586,16 +1593,6 @@ h4 {
 
 .sh-contact-content-wrapper .sh-copy-reset:has(a[href^="mailto:"]) {
   line-height: 1.3;
-}
-
-@media (max-width: 600px) {
-  /* Allow long email addresses to break across lines on narrow phones */
-  .sh-contact-content-wrapper .sh-copy-reset a[href^="mailto:"] {
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-all;
-    font-size: 0.82rem;
-  }
 }
 
 .sh-contact-note {
@@ -1880,6 +1877,11 @@ h4 {
 .sh-profile-icon.is-pure:hover,
 .sh-profile-icon.is-pure:focus-visible {
   background: #001e44;
+}
+
+.sh-profile-icon.is-scholar:hover,
+.sh-profile-icon.is-scholar:focus-visible {
+  background: #4285f4;
 }
 
 /* --- Footer --- */
