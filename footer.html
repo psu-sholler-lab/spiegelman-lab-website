@@ -4,16 +4,10 @@
     <div class="sh-site-footer-row">
       <!-- left aligned -->
       <div class="sh-site-footer-copy">
-        Copyright <span id="sh-footer-year">2026</span> © The Pennsylvania State
+        Copyright © <span id="sh-footer-year">2026</span> The Pennsylvania State
         University
       </div>
 
-      <!-- right aligned -->
-      <div class="sh-footer-actions">
-        <div class="sh-footer-social-row">
-          <div class="sh-footer-social" data-social-set="beatcc"></div>
-        </div>
-      </div>
     </div>
 
     <div class="sh-site-footer-spacer"></div>
@@ -74,56 +68,10 @@
     (function () {
       var footer = document.querySelector(".sh-site-footer");
       if (!footer) return;
-      var socialSets = document.querySelectorAll("[data-social-set='beatcc']");
       const credit = document.querySelector(".sh-footer-credit");
       const year = document.querySelector("#sh-footer-year");
-      var socialLinks = [
-        {
-          href: "https://www.facebook.com/beatccresearch/",
-          iconClass: "fa-facebook-f",
-          label: "Facebook",
-          platformClass: "fb",
-        },
-        {
-          href: "https://www.instagram.com/beatchildhoodcancerresearch/",
-          iconClass: "fa-instagram",
-          label: "Instagram",
-          platformClass: "in",
-        },
-        {
-          href: "https://www.linkedin.com/company/beat-childhood-cancer-research-consortium/posts/?feedView=all",
-          iconClass: "fa-linkedin-in",
-          label: "LinkedIn",
-          platformClass: "li",
-        },
-      ];
 
       if (year) year.textContent = new Date().getFullYear();
-
-      for (var setIndex = 0; setIndex < socialSets.length; setIndex += 1) {
-        var container = socialSets[setIndex];
-        var markup = "";
-        for (
-          var linkIndex = 0;
-          linkIndex < socialLinks.length;
-          linkIndex += 1
-        ) {
-          var link = socialLinks[linkIndex];
-          markup +=
-            '<a href="' +
-            link.href +
-            '" class="sh-social-icon ' +
-            link.platformClass +
-            '" target="_blank" rel="noopener" aria-label="' +
-            link.label +
-            '">' +
-            '<i class="fab ' +
-            link.iconClass +
-            '" aria-hidden="true"></i>' +
-            "</a>";
-        }
-        container.innerHTML = markup;
-      }
 
       if (!credit) return;
       const clamp = (value) => Math.min(Math.max(value, 0), 1);
