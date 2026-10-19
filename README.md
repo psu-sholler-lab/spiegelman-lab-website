@@ -1,6 +1,6 @@
-# sholler-lab-website
+# spiegelman-lab-website
 
-HTML and CSS code for the Sholler Lab website (<https://sites.psu.edu/shollerlab>) at the Penn State College of Medicine.
+HTML and CSS code for the Spiegelman Lab website (<https://sites.psu.edu/spiegelmanlab>) at the Penn State College of Medicine.
 
 ## Structure
 
