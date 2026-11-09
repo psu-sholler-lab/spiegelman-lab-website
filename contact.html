@@ -1,3 +1,24 @@
+<style>
+  /* Department links: one per line, in a brighter link blue */
+  .sh-contact-content-wrapper .sh-dept-links a {
+    display: block;
+    width: fit-content;
+    color: #0072ce;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  .sh-contact-content-wrapper .sh-dept-links a + a {
+    margin-top: 4px;
+  }
+
+  .sh-contact-content-wrapper .sh-dept-links a:hover,
+  .sh-contact-content-wrapper .sh-dept-links a:focus-visible {
+    color: var(--beaver-blue);
+    text-decoration: underline;
+  }
+</style>
 <section
   class="sh-section sh-section-top-compact sh-page-top sh-page-match-research-top sh-contact-intro sh-page-intro"
 >
@@ -60,7 +81,7 @@
               >
             </p>
             <p class="sh-label">Department</p>
-            <p class="sh-copy-reset">
+            <p class="sh-copy-reset sh-dept-links">
               <a href="https://med.psu.edu/" target="_blank" rel="noopener">
                 Penn State College of Medicine
               </a>
