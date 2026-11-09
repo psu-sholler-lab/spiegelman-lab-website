@@ -2595,40 +2595,6 @@ h4 {
   border-left: 6px solid var(--pugh-blue);
 }
 
-.sh-project-card::before {
-  content: "+";
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 26px;
-  height: 26px;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  font-size: 1.05rem;
-  color: var(--nittany-navy);
-  background: #f2f5fa;
-  border: 1px solid rgba(0, 30, 68, 0.12);
-  border-radius: 999px;
-  transition: 0.15s ease;
-  pointer-events: none;
-}
-
-.sh-project-card:hover,
-.sh-project-card:focus {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 30, 68, 0.12);
-  border-color: var(--beaver-blue);
-}
-
-.sh-project-card:hover::before,
-.sh-project-card:focus::before {
-  background: var(--beaver-blue);
-  color: #fff;
-  border-color: var(--beaver-blue);
-  transform: scale(1.05);
-}
-
 .sh-modal-backdrop {
   position: fixed;
   inset: 0;
