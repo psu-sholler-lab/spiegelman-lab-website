@@ -69,6 +69,12 @@
               vspiegelman@pennstatehealth.psu.edu
             </a>
           </div>
+
+          <p class="sh-pi-bio">
+            Physician-scientist directing an NIH-funded research program
+            studying the molecular pathways driving human malignancies, with a
+            focus on RNA-binding proteins and tumor metastasis.
+          </p>
         </div>
       </div>
     </div>
@@ -84,15 +90,27 @@
     align-items: center;
   }
 
+  .sh-card-pi .sh-pi-bio {
+    margin: 16px 0 0;
+    padding: 0;
+    max-width: 680px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink-muted);
+  }
+
   @media (max-width: 800px) {
     .sh-card-profile-feature.sh-card-pi {
       grid-template-columns: 1fr;
     }
   }
 
+  /* Intro text spans the same width as the cards below it */
+  .sh-page-match-research-top .sh-page-intro-header,
+  .sh-page-match-research-top .sh-page-intro-copy,
   .team-page .sh-page-intro-header,
   .team-page .sh-lead {
-    max-width: 980px;
+    max-width: none;
   }
 </style>
 <section
@@ -119,8 +137,8 @@
           class="sh-block-link"
         >
           <img
-            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23f6f8fb'/%3E%3Ccircle cx='100' cy='78' r='38' fill='%23c9d6e7'/%3E%3Cpath d='M40 176c8-46 44-70 60-70s52 24 60 70' fill='%23c9d6e7'/%3E%3C/svg%3E"
-            alt="Vikash Singh &mdash; headshot coming soon"
+            src="https://sites.psu.edu/spiegelmanlab/files/2026/10/Vikash-Singh.jpg"
+            alt="Vikash Singh"
             class="sh-profile-img"
           />
         </a>
@@ -163,8 +181,8 @@
       <!-- 2) Anna Fajardo -->
       <div class="sh-card">
         <img
-          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23f6f8fb'/%3E%3Ccircle cx='100' cy='78' r='38' fill='%23c9d6e7'/%3E%3Cpath d='M40 176c8-46 44-70 60-70s52 24 60 70' fill='%23c9d6e7'/%3E%3C/svg%3E"
-          alt="Anna Fajardo &mdash; headshot coming soon"
+          src="https://sites.psu.edu/spiegelmanlab/files/2026/10/Fajardo_Anna_PSU-headshot-Copy.jpg"
+          alt="Anna Fajardo"
           class="sh-profile-img"
         />
         <div class="sh-profile-head">
@@ -196,8 +214,8 @@
       <!-- 3) Chethana Prakasha Gowda -->
       <div class="sh-card">
         <img
-          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23f6f8fb'/%3E%3Ccircle cx='100' cy='78' r='38' fill='%23c9d6e7'/%3E%3Cpath d='M40 176c8-46 44-70 60-70s52 24 60 70' fill='%23c9d6e7'/%3E%3C/svg%3E"
-          alt="Chethana Prakasha Gowda &mdash; headshot coming soon"
+          src="https://sites.psu.edu/spiegelmanlab/files/2026/10/Chethana-Gowda.jpg"
+          alt="Chethana Prakasha Gowda"
           class="sh-profile-img"
         />
         <div class="sh-profile-head">
@@ -221,33 +239,35 @@
       <!-- 4) Tyler Wood -->
       <div class="sh-card">
         <img
-          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23f6f8fb'/%3E%3Ccircle cx='100' cy='78' r='38' fill='%23c9d6e7'/%3E%3Cpath d='M40 176c8-46 44-70 60-70s52 24 60 70' fill='%23c9d6e7'/%3E%3C/svg%3E"
-          alt="Tyler Wood &mdash; headshot coming soon"
+          src="https://sites.psu.edu/spiegelmanlab/files/2026/10/Tyler-Wood.jpg"
+          alt="Tyler Wood"
           class="sh-profile-img"
         />
         <div class="sh-profile-head">
           <h3>Tyler Wood</h3>
         </div>
         <div class="sh-role-label">Graduate Student</div>
-        <div class="sh-profile-meta">
-          <span class="sh-text-sm">Full details coming soon</span>
-        </div>
+        <p>
+          Studies the role of post-transcriptionally modified RNA in extracellular
+          vesicle function in cancer.
+        </p>
       </div>
 
       <!-- 5) Michael Czap -->
       <div class="sh-card">
         <img
-          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23f6f8fb'/%3E%3Ccircle cx='100' cy='78' r='38' fill='%23c9d6e7'/%3E%3Cpath d='M40 176c8-46 44-70 60-70s52 24 60 70' fill='%23c9d6e7'/%3E%3C/svg%3E"
-          alt="Michael Czap &mdash; headshot coming soon"
+          src="https://sites.psu.edu/spiegelmanlab/files/2026/10/Czap-Michael-.jpg"
+          alt="Michael Czap"
           class="sh-profile-img"
         />
         <div class="sh-profile-head">
           <h3>Michael Czap</h3>
         </div>
         <div class="sh-role-label">Graduate Student</div>
-        <div class="sh-profile-meta">
-          <span class="sh-text-sm">Full details coming soon</span>
-        </div>
+        <p>
+          Elucidates the mechanisms and effects of tumor-derived extracellular
+          vesicles on stromal cells during metastasis.
+        </p>
       </div>
     </div>
   </div>
