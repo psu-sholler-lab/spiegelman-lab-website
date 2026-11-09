@@ -1,18 +1,8 @@
 <style>
   :root {
     --research-blue: #1e407c;
-    --research-navy: #001e44;
-    --research-gradient: linear-gradient(
-      120deg,
-      #142c58 0%,
-      #23528f 45%,
-      #3a6fb6 60%,
-      #142c58 100%
-    );
     --research-radius-lg: 18px;
     --research-shadow-card: 0 10px 26px rgba(0, 30, 68, 0.08);
-    --research-shadow-card-hover: 0 16px 34px rgba(0, 30, 68, 0.18);
-    --research-shadow-float: 0 24px 70px rgba(0, 0, 0, 0.35);
   }
 
   .research-page {
@@ -31,366 +21,90 @@
     max-width: none;
   }
 
-  .research-page .sh-click-hint {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--research-blue);
-    margin: 16px 0 4px;
-  }
-
   .research-page .sh-project-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-    margin-top: 18px;
+    gap: 20px;
+    margin-top: 28px;
+    align-items: stretch;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     .research-page .sh-project-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     .research-page .sh-project-grid {
       grid-template-columns: 1fr;
     }
   }
 
+  /* Static cards: full project text shown, nothing to click */
   .research-page .sh-project-card {
-    position: relative;
+    position: static;
+    display: block;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    cursor: default;
     background: #fff;
     border: 1px solid rgba(0, 30, 68, 0.12);
+    border-left: 6px solid var(--research-blue);
     border-radius: var(--research-radius-lg);
     box-shadow: var(--research-shadow-card);
-    overflow: hidden;
-    cursor: pointer;
+    padding: 20px;
+  }
+
+  /* No "+" badge: the full text is already shown */
+  .research-page .sh-project-card::before,
+  .research-page .sh-project-card::after,
+  .research-page .sh-project-card:hover::before,
+  .research-page .sh-project-card:focus::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  .research-page .sh-project-card {
     transition:
       transform 0.18s ease,
       box-shadow 0.18s ease,
       border-color 0.18s ease;
-    display: flex;
-    flex-direction: column;
-    outline: none;
-    border-left: 6px solid transparent;
   }
 
-  .research-page .sh-project-card:focus-visible,
   .research-page .sh-project-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 16px 34px rgba(0, 30, 68, 0.16);
     border-color: var(--research-blue);
-    box-shadow: var(--research-shadow-card-hover);
     border-left-color: #96bee6;
   }
 
-  .research-page .sh-project-thumb {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-    border-radius: var(--research-radius-lg);
+  .research-page .sh-project-card h3 {
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #052657;
+    overflow-wrap: break-word;
   }
 
-  .research-page .sh-project-card.is-left-thumb .sh-project-thumb {
-    object-position: left center;
-  }
-
-  .research-page .sh-project-card.is-contain-thumb .sh-project-thumb {
-    object-fit: contain;
-    background: #fff;
-  }
-
-  .research-page .sh-project-card h3,
   .research-page .sh-project-card p {
     margin: 0;
-    overflow-wrap: anywhere;
+    padding: 0;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: rgba(0, 30, 68, 0.8);
+    overflow-wrap: break-word;
   }
 
-  .research-page .sh-project-content {
-    padding: 18px 56px 18px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .research-page .sh-project-card h3 {
-    font-size: 1.15rem;
-    color: #052657;
-  }
-
-  .research-page .sh-project-short {
-    font-size: 0.95rem;
-    color: rgba(0, 30, 68, 0.78);
-    line-height: 1.5;
-  }
-
-  .research-page .sh-project-card::before {
-    content: "+";
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 30px;
-    height: 30px;
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-    font-size: 1.05rem;
-    color: var(--research-navy);
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    box-shadow: 0 5px 14px rgba(0, 30, 68, 0.14);
-    pointer-events: none;
-  }
-
-  .research-page .sh-project-card:hover::before,
-  .research-page .sh-project-card:focus-visible::before {
-    background: var(--research-blue);
-    color: #fff;
-  }
-
-  .sh-modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+  /* Divi's code module can inject stray <p>/<br> between elements */
+  .research-page .sh-project-card > br,
+  .research-page .sh-project-card > p:empty,
+  .research-page .sh-project-grid > br,
+  .research-page .sh-project-grid > p:empty {
     display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    z-index: 9999;
-  }
-
-  .sh-modal-backdrop.is-open {
-    display: flex;
-    animation: shBackdropIn 0.28s ease forwards;
-  }
-
-  .sh-modal-backdrop.is-closing {
-    display: flex;
-    animation: shBackdropOut 0.22s ease forwards;
-  }
-
-  .sh-modal {
-    background: #fff;
-    width: min(1020px, 96vw);
-    max-height: 90vh;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--research-shadow-float);
-    animation: shModalIn 0.38s cubic-bezier(0.34, 1.42, 0.64, 1) forwards;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sh-modal-backdrop.is-closing .sh-modal {
-    animation: shModalOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  @keyframes shBackdropIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes shBackdropOut {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes shModalIn {
-    from {
-      opacity: 0;
-      transform: translateY(24px) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes shModalOut {
-    from {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(14px) scale(0.97);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sh-modal,
-    .sh-modal-backdrop {
-      animation: none !important;
-    }
-  }
-
-  .sh-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    background: var(--research-gradient);
-    background-size: 220% 220%;
-    background-position: var(--gradient-pos, 0% 50%);
-    color: #f5f8ff;
-    border-radius: var(--research-radius-lg) var(--research-radius-lg) 0 0;
-    box-shadow: 0 6px 20px rgba(0, 30, 68, 0.35);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
-    transition: background-position 0.15s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .sh-modal-header::after {
-    content: "";
-    position: absolute;
-    inset: -60% 0;
-    background: radial-gradient(
-      circle at var(--glow-x, 50%) var(--glow-y, 50%),
-      rgba(75, 126, 196, 0.45),
-      rgba(20, 44, 88, 0) 60%
-    );
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    pointer-events: none;
-  }
-
-  .sh-modal-header.is-hovered::after {
-    opacity: 1;
-  }
-
-  .sh-modal-header h3 {
-    margin: 0;
-    font-size: 1.45rem;
-    overflow-wrap: anywhere;
-    color: #f5f8ff;
-  }
-
-  .sh-modal-close {
-    background: transparent;
-    border: 0;
-    padding: 0;
-    color: #f5f8ff;
-    font-size: 1.7rem;
-    cursor: pointer;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-  }
-
-  .sh-modal-body {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding: 20px;
-    overflow-y: auto;
-    font-size: 0.96rem;
-    line-height: 1.6;
-    align-items: stretch;
-    justify-items: start;
-  }
-
-  @media (max-width: 800px) {
-    .sh-modal-body {
-      grid-template-columns: 1fr;
-    }
-
-    .sh-modal-media {
-      max-width: 100%;
-      min-width: 0;
-      margin-inline: auto;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .sh-modal-backdrop {
-      padding: 6px;
-    }
-
-    .sh-modal-header {
-      padding: 12px 14px;
-    }
-
-    .sh-modal-header h3 {
-      font-size: 1.2rem;
-    }
-
-    .sh-modal-body {
-      padding: 14px;
-      gap: 14px;
-    }
-  }
-
-  .sh-modal-body > div {
-    border-radius: var(--research-radius-lg);
-  }
-
-  .sh-modal-body > div:not(.sh-modal-media) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .sh-modal-body p {
-    margin: 0 0 10px;
-    overflow-wrap: anywhere;
-  }
-
-  .sh-modal-meta {
-    font-weight: 700;
-    color: var(--research-blue);
-    margin-bottom: 10px;
-    font-size: 0.98rem;
-  }
-
-  .sh-modal-impact {
-    font-weight: 600;
-  }
-
-  .sh-modal-keywords {
-    font-size: 0.9rem;
-    font-style: italic;
-    color: rgba(0, 30, 68, 0.78);
-    margin-bottom: 0;
-  }
-
-  .sh-modal-keywords strong {
-    font-style: normal;
-    font-weight: 700;
-    color: var(--research-blue);
-  }
-
-  /* Modal image rounding + centering (no crop) */
-  .sh-modal-media {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    align-self: stretch;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .sh-modal-media img {
-    border-radius: var(--research-radius-lg);
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: none;
-    aspect-ratio: auto;
-    object-fit: contain;
   }
 </style>
 
@@ -415,400 +129,135 @@
     </div>
 
     <div class="sh-project-grid">
-      <div
-        class="sh-project-card"
-        data-modal="m1"
-        tabindex="0"
-        role="button"
-        aria-controls="m1"
-      >
-        <div class="sh-project-content">
-          <h3>RNA-Binding Proteins and Cancer</h3>
-          <p class="sh-project-short">
-            How the RNA-binding protein IGF2BP1 drives tumor growth,
-            metastasis, and therapy resistance, and how to inhibit it.
-          </p>
-        </div>
-      </div>
+      <article class="sh-project-card">
+        <h3>RNA-Binding Proteins and Cancer</h3>
+        <p>
+          A central focus of our laboratory is the role of RNA-binding
+          proteins in cancer biology, particularly insulin-like growth
+          factor 2 mRNA-binding protein 1 (IGF2BP1), also known as
+          CRD-BP or IMP1. IGF2BP1 regulates gene expression after
+          transcription by binding specific messenger RNAs and
+          controlling their stability, localization, and translation.
+          Our studies investigate how increased IGF2BP1 expression
+          promotes tumor-cell proliferation, survival, invasion,
+          stem-like properties, metastasis, and resistance to therapy
+          in cancers including neuroblastoma, colorectal cancer,
+          melanoma, and lung carcinoma. We are also defining the RNA
+          targets, protein partners, and signaling pathways that
+          enable IGF2BP1 to function as an oncogenic regulator. An
+          important translational objective is to develop and evaluate
+          selective IGF2BP1 inhibitors and determine whether targeting
+          this protein can suppress tumor growth, limit metastatic
+          disease, and improve responses to existing treatments.
+        </p>
+      </article>
 
-      <div
-        class="sh-project-card"
-        data-modal="m2"
-        tabindex="0"
-        role="button"
-        aria-controls="m2"
-      >
-        <div class="sh-project-content">
-          <h3>Neuroblastoma Metastasis</h3>
-          <p class="sh-project-short">
-            Uncovering how high-risk neuroblastoma cells spread and survive in
-            distant tissues to find targetable vulnerabilities.
-          </p>
-        </div>
-      </div>
+      <article class="sh-project-card">
+        <h3>Neuroblastoma Metastasis</h3>
+        <p>
+          A major area of laboratory research is high-risk
+          neuroblastoma, an aggressive pediatric cancer in which
+          metastatic disease remains a leading cause of treatment
+          failure. We investigate the molecular mechanisms that allow
+          neuroblastoma cells to disseminate, survive in distant
+          tissues, and establish metastatic tumors. Our studies have
+          identified IGF2BP1 as an important regulator of
+          neuroblastoma progression and are examining how it
+          influences tumor-cell behavior, metastatic fitness, and
+          interactions with the surrounding tissue. We use
+          complementary models&mdash;including highly metastatic mouse
+          cell lines developed in our lab, patient-derived systems,
+          organoids, immunocompetent mouse models, and specialized
+          models of neuroblastoma&mdash;to study both tumor-intrinsic
+          mechanisms and tumor&ndash;host interactions. These efforts
+          are directed toward identifying vulnerabilities that can be
+          targeted to prevent or treat metastatic neuroblastoma.
+        </p>
+      </article>
 
-      <div
-        class="sh-project-card"
-        data-modal="m3"
-        tabindex="0"
-        role="button"
-        aria-controls="m3"
-      >
-        <div class="sh-project-content">
-          <h3>Extracellular Vesicles and the Tumor Microenvironment</h3>
-          <p class="sh-project-short">
-            How tumor-derived extracellular vesicles remodel the
-            microenvironment and prepare distant organs for metastasis.
-          </p>
-        </div>
-      </div>
+      <article class="sh-project-card">
+        <h3>Extracellular Vesicles and the Tumor Microenvironment</h3>
+        <p>
+          We investigate how extracellular vesicles, including
+          exosomes, mediate communication between tumor cells and
+          distant tissues. These vesicles transport proteins, RNAs,
+          and other biological signals that can remodel the tumor
+          microenvironment and prepare distant organs for metastatic
+          colonization. Our research has examined how
+          extracellular-vesicle cargo is regulated and how
+          vesicle-associated factors contribute to the formation of
+          pre-metastatic niches in neuroblastoma and other cancers. By
+          defining the molecular contents and biological effects of
+          cancer-associated vesicles, we seek to develop new
+          biomarkers and therapeutic strategies that disrupt tumor
+          communication.
+        </p>
+      </article>
 
-      <div
-        class="sh-project-card"
-        data-modal="m4"
-        tabindex="0"
-        role="button"
-        aria-controls="m4"
-      >
-        <div class="sh-project-content">
-          <h3>Cancer Immunology and Therapy Resistance</h3>
-          <p class="sh-project-short">
-            How tumors suppress antitumor immunity and resist treatment,
-            including anti-GD2 immunotherapy in neuroblastoma.
-          </p>
-        </div>
-      </div>
+      <article class="sh-project-card">
+        <h3>Cancer Immunology and Therapy Resistance</h3>
+        <p>
+          Another important research interest is the relationship
+          between oncogenic RNA regulation, the immune
+          microenvironment, and response to cancer therapy. We study
+          how tumor cells use molecular signals&mdash;including
+          RNA-binding proteins and extracellular-vesicle
+          cargo&mdash;to suppress antitumor immunity and promote
+          resistance to treatment. In neuroblastoma, our work examines
+          mechanisms that limit the effectiveness of anti-GD2
+          immunotherapy and investigates strategies for improving
+          immune-mediated tumor control. We are particularly
+          interested in how the tumor microenvironment influences
+          innate and adaptive immune responses, and how these
+          interactions can be therapeutically modified. Our long-term
+          goal is to develop rational combination treatments that
+          integrate targeted inhibitors, chemotherapy, and
+          immunotherapy to overcome resistance and improve outcomes
+          for patients with high-risk disease.
+        </p>
+      </article>
 
-      <div
-        class="sh-project-card"
-        data-modal="m5"
-        tabindex="0"
-        role="button"
-        aria-controls="m5"
-      >
-        <div class="sh-project-content">
-          <h3>Melanoma Metastasis and Therapeutic Vulnerabilities</h3>
-          <p class="sh-project-short">
-            Using animal models and CRISPR screening to identify actionable
-            drivers of melanoma metastasis, such as Polr1a.
-          </p>
-        </div>
-      </div>
+      <article class="sh-project-card">
+        <h3>Melanoma Metastasis and Therapeutic Vulnerabilities</h3>
+        <p>
+          The laboratory also studies the molecular basis of melanoma
+          development and metastatic progression. Our earlier work
+          established a role for CRD-BP/IGF2BP1 in malignant melanoma,
+          while subsequent studies examined how RNA-binding proteins
+          and extracellular vesicles influence melanoma-cell behavior
+          and communication with distant tissues. We use in vitro and
+          in vivo models, together with functional genomic approaches
+          such as CRISPR screening, to identify genes that are
+          required for metastatic growth. These studies have revealed
+          potential vulnerabilities, including Polr1a-dependent
+          mechanisms that may be targeted therapeutically. By
+          integrating molecular biology, animal models, and genomic
+          screening, we aim to identify actionable drivers of melanoma
+          metastasis and develop strategies to prevent the spread of
+          disease.
+        </p>
+      </article>
 
-      <div
-        class="sh-project-card"
-        data-modal="m6"
-        tabindex="0"
-        role="button"
-        aria-controls="m6"
-      >
-        <div class="sh-project-content">
-          <h3>Translational Models and Therapeutic Development</h3>
-          <p class="sh-project-short">
-            Connecting mechanistic discoveries to organoids, animal models,
-            and functional screens to develop new therapies.
-          </p>
-        </div>
-      </div>
+      <article class="sh-project-card">
+        <h3>Translational Models and Therapeutic Development</h3>
+        <p>
+          Across all our research programs, we pursue a translational
+          approach that connects mechanistic discoveries to clinically
+          relevant models and therapeutic development. We use
+          patient-derived organoids, immunocompetent animal models,
+          metastatic cell lines, extracellular-vesicle platforms,
+          proteomic analyses, and CRISPR-based functional screens to
+          study cancer in biologically complex settings. These systems
+          allow us to examine tumor growth, metastasis, immune
+          interactions, and treatment response more accurately than
+          simplified experimental models alone. Our overarching goal
+          is to define the molecular mechanisms that make cancer
+          aggressive and treatment-resistant, and then translate those
+          discoveries into targeted therapies, improved immunotherapy
+          combinations, and precision-medicine approaches for
+          pediatric and adult cancers.
+        </p>
+      </article>
     </div>
   </div>
 </section>
-
-<div
-  class="sh-modal-backdrop"
-  id="m1"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="m1-title"
->
-  <div class="sh-modal">
-    <div class="sh-modal-header">
-      <h3 id="m1-title">RNA-Binding Proteins and Cancer</h3>
-      <button class="sh-modal-close" aria-label="Close modal">&times;</button>
-    </div>
-    <div class="sh-modal-body">
-      <div>
-        <p>
-          A central focus of our laboratory is the role of RNA-binding
-          proteins in cancer biology, particularly insulin-like growth factor
-          2 mRNA-binding protein 1 (IGF2BP1), also known as CRD-BP or IMP1.
-          IGF2BP1 regulates gene expression after transcription by binding
-          specific messenger RNAs and controlling their stability,
-          localization, and translation. Our studies investigate how increased
-          IGF2BP1 expression promotes tumor-cell proliferation, survival,
-          invasion, stem-like properties, metastasis, and resistance to
-          therapy in cancers including neuroblastoma, colorectal cancer,
-          melanoma, and lung carcinoma. We are also defining the RNA targets,
-          protein partners, and signaling pathways that enable IGF2BP1 to
-          function as an oncogenic regulator. An important translational
-          objective is to develop and evaluate selective IGF2BP1 inhibitors
-          and determine whether targeting this protein can suppress tumor
-          growth, limit metastatic disease, and improve responses to existing
-          treatments.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="sh-modal-backdrop"
-  id="m2"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="m2-title"
->
-  <div class="sh-modal">
-    <div class="sh-modal-header">
-      <h3 id="m2-title">Neuroblastoma Metastasis</h3>
-      <button class="sh-modal-close" aria-label="Close modal">&times;</button>
-    </div>
-    <div class="sh-modal-body">
-      <div>
-        <p>
-          A major area of laboratory research is high-risk neuroblastoma, an
-          aggressive pediatric cancer in which metastatic disease remains a
-          leading cause of treatment failure. We investigate the molecular
-          mechanisms that allow neuroblastoma cells to disseminate, survive in
-          distant tissues, and establish metastatic tumors. Our studies have
-          identified IGF2BP1 as an important regulator of neuroblastoma
-          progression and are examining how it influences tumor-cell behavior,
-          metastatic fitness, and interactions with the surrounding tissue. We
-          use complementary models&mdash;including highly metastatic mouse
-          cell lines developed in our lab, patient-derived systems, organoids,
-          immunocompetent mouse models, and specialized models of
-          neuroblastoma&mdash;to study both tumor-intrinsic mechanisms and
-          tumor&ndash;host interactions. These efforts are directed toward
-          identifying vulnerabilities that can be targeted to prevent or treat
-          metastatic neuroblastoma.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="sh-modal-backdrop"
-  id="m3"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="m3-title"
->
-  <div class="sh-modal">
-    <div class="sh-modal-header">
-      <h3 id="m3-title">Extracellular Vesicles and the Tumor Microenvironment</h3>
-      <button class="sh-modal-close" aria-label="Close modal">&times;</button>
-    </div>
-    <div class="sh-modal-body">
-      <div>
-        <p>
-          We investigate how extracellular vesicles, including exosomes,
-          mediate communication between tumor cells and distant tissues. These
-          vesicles transport proteins, RNAs, and other biological signals that
-          can remodel the tumor microenvironment and prepare distant organs
-          for metastatic colonization. Our research has examined how
-          extracellular-vesicle cargo is regulated and how vesicle-associated
-          factors contribute to the formation of pre-metastatic niches in
-          neuroblastoma and other cancers. By defining the molecular contents
-          and biological effects of cancer-associated vesicles, we seek to
-          develop new biomarkers and therapeutic strategies that disrupt tumor
-          communication.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="sh-modal-backdrop"
-  id="m4"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="m4-title"
->
-  <div class="sh-modal">
-    <div class="sh-modal-header">
-      <h3 id="m4-title">Cancer Immunology and Therapy Resistance</h3>
-      <button class="sh-modal-close" aria-label="Close modal">&times;</button>
-    </div>
-    <div class="sh-modal-body">
-      <div>
-        <p>
-          Another important research interest is the relationship between
-          oncogenic RNA regulation, the immune microenvironment, and response
-          to cancer therapy. We study how tumor cells use molecular
-          signals&mdash;including RNA-binding proteins and
-          extracellular-vesicle cargo&mdash;to suppress antitumor immunity and
-          promote resistance to treatment. In neuroblastoma, our work examines
-          mechanisms that limit the effectiveness of anti-GD2 immunotherapy
-          and investigates strategies for improving immune-mediated tumor
-          control. We are particularly interested in how the tumor
-          microenvironment influences innate and adaptive immune responses,
-          and how these interactions can be therapeutically modified. Our
-          long-term goal is to develop rational combination treatments that
-          integrate targeted inhibitors, chemotherapy, and immunotherapy to
-          overcome resistance and improve outcomes for patients with high-risk
-          disease.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="sh-modal-backdrop"
-  id="m5"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="m5-title"
->
-  <div class="sh-modal">
-    <div class="sh-modal-header">
-      <h3 id="m5-title">Melanoma Metastasis and Therapeutic Vulnerabilities</h3>
-      <button class="sh-modal-close" aria-label="Close modal">&times;</button>
-    </div>
-    <div class="sh-modal-body">
-      <div>
-        <p>
-          The laboratory also studies the molecular basis of melanoma
-          development and metastatic progression. Our earlier work established
-          a role for CRD-BP/IGF2BP1 in malignant melanoma, while subsequent
-          studies examined how RNA-binding proteins and extracellular vesicles
-          influence melanoma-cell behavior and communication with distant
-          tissues. We use in vitro and in vivo models, together with
-          functional genomic approaches such as CRISPR screening, to identify
-          genes that are required for metastatic growth. These studies have
-          revealed potential vulnerabilities, including Polr1a-dependent
-          mechanisms that may be targeted therapeutically. By integrating
-          molecular biology, animal models, and genomic screening, we aim to
-          identify actionable drivers of melanoma metastasis and develop
-          strategies to prevent the spread of disease.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="sh-modal-backdrop"
-  id="m6"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="m6-title"
->
-  <div class="sh-modal">
-    <div class="sh-modal-header">
-      <h3 id="m6-title">Translational Models and Therapeutic Development</h3>
-      <button class="sh-modal-close" aria-label="Close modal">&times;</button>
-    </div>
-    <div class="sh-modal-body">
-      <div>
-        <p>
-          Across all our research programs, we pursue a translational approach
-          that connects mechanistic discoveries to clinically relevant models
-          and therapeutic development. We use patient-derived organoids,
-          immunocompetent animal models, metastatic cell lines,
-          extracellular-vesicle platforms, proteomic analyses, and
-          CRISPR-based functional screens to study cancer in biologically
-          complex settings. These systems allow us to examine tumor growth,
-          metastasis, immune interactions, and treatment response more
-          accurately than simplified experimental models alone. Our
-          overarching goal is to define the molecular mechanisms that make
-          cancer aggressive and treatment-resistant, and then translate those
-          discoveries into targeted therapies, improved immunotherapy
-          combinations, and precision-medicine approaches for pediatric and
-          adult cancers.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".sh-project-card");
-    const modals = document.querySelectorAll(".sh-modal-backdrop");
-    const modalHeaders = document.querySelectorAll(".sh-modal-header");
-
-    const closeAll = () => {
-      document.body.style.overflow = "";
-      modals.forEach((modal) => {
-        if (!modal.classList.contains("is-open")) return;
-        modal.classList.add("is-closing");
-        modal.addEventListener(
-          "animationend",
-          () => modal.classList.remove("is-open", "is-closing"),
-          { once: true },
-        );
-      });
-    };
-
-    const openModal = (id) => {
-      const modal = document.getElementById(id);
-      if (!modal) return;
-      closeAll();
-      document.body.style.overflow = "hidden";
-      modal.classList.add("is-open");
-      const closeBtn = modal.querySelector(".sh-modal-close");
-      if (closeBtn) closeBtn.focus();
-    };
-
-    modalHeaders.forEach((header) => {
-      let rafId;
-      const animateToCenter = () => {
-        header.classList.remove("is-hovered");
-        header.style.setProperty("--gradient-pos", "50% 50%");
-        header.style.setProperty("--glow-x", "50%");
-        header.style.setProperty("--glow-y", "50%");
-      };
-
-      header.addEventListener("pointermove", (event) => {
-        const rect = header.getBoundingClientRect();
-        const rawX = Math.min(
-          Math.max(((event.clientX - rect.left) / rect.width) * 100, 0),
-          100,
-        );
-        const rawY = Math.min(
-          Math.max(((event.clientY - rect.top) / rect.height) * 100, 0),
-          100,
-        );
-        const easedX = 50 + (rawX - 50) * 0.55;
-        const easedY = 50 + (rawY - 50) * 0.55;
-        header.classList.add("is-hovered");
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-          header.style.setProperty("--gradient-pos", `${easedX}% 50%`);
-          header.style.setProperty("--glow-x", `${easedX}%`);
-          header.style.setProperty("--glow-y", `${easedY}%`);
-          rafId = null;
-        });
-      });
-
-      header.addEventListener("pointerleave", animateToCenter);
-      animateToCenter();
-    });
-
-    cards.forEach((card) => {
-      const id = card.getAttribute("data-modal");
-      card.addEventListener("click", () => openModal(id));
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          openModal(id);
-        }
-      });
-    });
-
-    modals.forEach((modal) => {
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeAll();
-      });
-      const btn = modal.querySelector(".sh-modal-close");
-      if (btn) btn.addEventListener("click", closeAll);
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeAll();
-    });
-  });
-</script>
